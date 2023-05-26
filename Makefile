@@ -7,7 +7,7 @@
 GBDK_HOME = "/opt/gbdk/"
 
 LCC = $(GBDK_HOME)bin/lcc
-PNG2MTSPR = $(GBDK_HOME)bin/png2mtspr
+PNG2MTSPR = $(GBDK_HOME)bin/png2asset
 
 # You can uncomment the line below to turn on debug output
 #LCC = $(LCC) -debug

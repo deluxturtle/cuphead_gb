@@ -22,10 +22,10 @@ const uint8_t fire_frames_index[4] = {0,0,1,1}; //flipped the frames to do the u
 
 void player_init_anim()
 {
-    set_sprite_data(0, sizeof(sprite_player_idle_data)>>4, sprite_player_idle_data);
+    set_sprite_data(0, sizeof(sprite_player_idle_tiles)>>4, sprite_player_idle_tiles);
     CUPH_IDLE_TILE_START = sprite_tile_index;
-    sprite_tile_index += sizeof(sprite_player_idle_data)>>4;
-    set_sprite_data(sprite_tile_index, sizeof(sprite_player_fire_data)>>2, sprite_player_fire_data);
+    sprite_tile_index += sizeof(sprite_player_idle_tiles)>>4;
+    set_sprite_data(sprite_tile_index, sizeof(sprite_player_fire_tiles)>>2, sprite_player_fire_tiles);
     CUPH_FIRE_TILE_START = sprite_tile_index;
 
     animState = FIRE;
