@@ -15,8 +15,8 @@
 #include <gb/gb.h>
 #include <gb/metasprites.h>
 #include "player_base.h"
-#include "sprite_player_idle.h"
-#include "sprite_player_fire.h"
+#include "../res/sprite_player_idle.h"
+#include "../res/sprite_player_fire.h"
 
 #define CUPHEAD_SPRITE_START 0
 
