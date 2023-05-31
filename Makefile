@@ -6,11 +6,11 @@
 # to match your GBDK root directory (ex: GBDK_HOME = "C:/GBDK/"
 GBDK_HOME = "/opt/gbdk/"
 
-LCC = $(GBDK_HOME)bin/lcc
+LCC = $(GBDK_HOME)bin/lcc -debug
 # PNG2MTSPR = $(GBDK_HOME)bin/png2asset
 
 # You can uncomment the line below to turn on debug output
-#LCC = $(LCC) -debug
+#LCC = $(LCC) 
 
 # You can set the name of the .gb ROM file here
 PROJECTNAME    = Cuphead

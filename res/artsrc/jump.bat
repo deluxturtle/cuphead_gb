@@ -1,0 +1,1 @@
+C:\gbdk\bin\png2asset sprite_player_jump.png -sh 16 -spr8x8 -metasprite_only -c sprite_player_jump.c 

@@ -1,5 +1,4 @@
 #include "player_base.h"
-#include "player_sprites.h"
 
 const uint8_t startx = 55;
 const uint8_t starty = 55;
@@ -19,9 +18,4 @@ void player_init(){
 void player_update(){
     player_update_sprite();
     
-}
-
-
-void player_shoot(){
-    animState = FIRE;
 }

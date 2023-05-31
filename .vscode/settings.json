@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "sprite_player_idle.h": "c"
+        "sprite_player_idle.h": "c",
+        "player_sprites.h": "c"
     }
 }

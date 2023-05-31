@@ -13,12 +13,14 @@ uint8_t grounded = 1;
 uint8_t jump_ystart;
 
 void player_jump(){
+    
     if(grounded == 1){
         player.jumping = 1;
         grounded = 0;
         jump_ystart = player.pos.y;
         jump_index = 0;
         fall_index = FALLFRAMES;
+        animState = JUMP;
     }
     else{
         if(jump_index < JUMPFRAMES){//going up
@@ -31,13 +33,14 @@ void player_jump(){
         }
         else{//no platform, use a gravity to keep moving.
             player.pos.y+=FALLSPEED;
+            //if hit bottom trigger landing
             if(player.pos.y >= MAXWNDPOSY){
                 player.jumping = 0;
                 jump_index = 0;
                 grounded = 1;
                 player.pos.y = MAXWNDPOSY;
+                animState = IDLE;
             }
         }
-        move_metasprite(__current_metasprite, __current_base_tile, CUPHEAD_SPRITE_START, player.pos.x, player.pos.y);
     }
 }

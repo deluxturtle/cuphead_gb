@@ -17,8 +17,10 @@
 #include "player_base.h"
 #include "../res/sprite_player_idle.h"
 #include "../res/sprite_player_fire.h"
+#include "../res/sprite_player_jump.h"
 
-#define CUPHEAD_SPRITE_START 0
+
+
 
 /**
  * @brief Master list of animations
@@ -27,10 +29,13 @@
  */
 typedef enum AnimState{
     IDLE,
-    FIRE
+    FIRE,
+    JUMP
 }AnimState;
 
 extern AnimState animState;
+
+void player_reset_anim();
 
 /**
  * @brief Creates a list of animations to change animations on the fly.

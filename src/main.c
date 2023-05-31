@@ -36,7 +36,8 @@ void main(){
     while(1){
         get_input();
         
-        player_update();
+        //player_update();
+        player_update_sprite();
         
         wait_vbl_done();
     }
@@ -49,17 +50,20 @@ void main(){
  */
 void get_input(){
     
-    if(joypad() & J_RIGHT){
+    uint8_t joy = joypad();
+
+    if(joy & J_RIGHT){
         player_move_right();
     }
-    if(joypad() & J_LEFT){
+    else if(joy & J_LEFT){
         player_move_left();
     }
-    if(joypad() & J_A || player.jumping == 1){
+    if(joy & J_A || player.jumping == 1){
         player_jump();
+        //test_audio();
     }
-    if(joypad() & J_B){
-        player_shoot();
+    if(joy & J_B){
+        animState = FIRE;
         
     }
 }
