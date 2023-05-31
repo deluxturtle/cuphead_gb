@@ -20,3 +20,13 @@ Current project scope is just the first boss from cuphead - Root Pack
     - [ ] Spawn / Death
 - [ ] Flying Enemies
 - [ ] Background Art
+
+### Tools
+GBDK-2020
+Make
+vscode
+Emulicious
+
+### Thanks For Help and GBDK2020
+Toxa
+bbbbbr
