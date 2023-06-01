@@ -1,5 +1,5 @@
 /**
- * @file player_sprites.h
+ * @file player_animation.h
  * @author deluxturtle
  * @brief 
  * @version 0.1
@@ -9,8 +9,8 @@
  * 
  */
 
-#ifndef PLAYER_SPRITES_H
-#define PLAYER_SPRITES_H
+#ifndef PLAYER_ANIMATION_H
+#define PLAYER_ANIMATION_H
 
 #include <gb/gb.h>
 #include <gb/metasprites.h>
@@ -34,6 +34,10 @@ typedef enum AnimState{
 }AnimState;
 
 extern AnimState animState;
+extern metasprite_t *const *animations[4];
+extern uint8_t *anim_frames;
+extern uint8_t cur_frame;
+extern uint8_t animation_tile;
 
 void player_reset_anim();
 
@@ -45,7 +49,7 @@ void player_init_anim();
 
 void player_setanimshoot();
 
-void player_update_sprite();
+void player_update_animation();
 
 
 #endif

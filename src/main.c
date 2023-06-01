@@ -36,8 +36,7 @@ void main(){
     while(1){
         get_input();
         
-        //player_update();
-        player_update_sprite();
+        player_update();
         
         wait_vbl_done();
     }

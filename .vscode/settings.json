@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "sprite_player_idle.h": "c",
-        "player_sprites.h": "c"
+        "player_sprites.h": "c",
+        "metasprites.h": "c",
+        "player_base.h": "c",
+        "sprite_player_jump.h": "c"
     }
 }

@@ -16,6 +16,6 @@ void player_init(){
 }
 
 void player_update(){
-    player_update_sprite();
-    
+    player_update_animation();
+    move_metasprite(animations[animState][anim_frames[cur_frame - 1]], animation_tile, 0, player.pos.x, player.pos.y);
 }

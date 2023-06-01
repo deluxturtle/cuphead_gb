@@ -6,7 +6,7 @@
 #include "collider_c.h"
 #include "player_jump.h"
 #include "player_movement.h"
-#include "player_sprites.h"
+#include "player_animation.h"
 
 typedef struct Player{
     Position pos;

@@ -1,29 +1,31 @@
-#include "player_sprites.h"
+#include "player_animation.h"
+
 
 metasprite_t *const *animations[4];
-AnimState animState = IDLE;
+AnimState animState;
 AnimState prevAnimState;
+
+
 uint8_t animation_tile;
 uint8_t sprite_tile_index = 0;
-const uint8_t CUPH_IDLE_TILE_START = 0;
-const uint8_t CUPH_FIRE_TILE_START = 12;
-const uint8_t CUPH_JUMP_TILE_START = 18;
 
 uint8_t counter = 0;
-
-//animation frame counter;
-uint8_t cur_frame = 1;
-int8_t anim_dir = 1; //direciton to go through animation.
-
 uint8_t *anim_frames;
 
+uint8_t cur_frame = 1;//animation frame counter;
+int8_t anim_dir = 1; //direciton to go through animation.
+
+
 //IDLE ANIMATION
+const uint8_t CUPH_IDLE_TILE_START = 0;
 const uint8_t idle_frames = 8;
 const uint8_t idle_frame_index[8] = {0, 0, 0, 1, 2, 3, 3, 3};
 //FIRE ANIMATION
+const uint8_t CUPH_FIRE_TILE_START = 12;
 const uint8_t fire_frames = 5;
 const uint8_t fire_frames_index[5] = {0,0,1,1,0}; //flipped the frames to do the up motion first.
 //JUMP ANIMATION
+const uint8_t CUPH_JUMP_TILE_START = 18;
 const uint8_t jump_frames = 16;
 const uint8_t jump_frames_index[16] = {0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7};
 
@@ -111,7 +113,7 @@ void play_fire()
 }
 
 
-void player_update_sprite()
+void player_update_animation()
 {
     //if animation state changed go back to frame 1;
     if(prevAnimState != animState){
@@ -135,6 +137,6 @@ void player_update_sprite()
                 play_idle();
                 break;
         }
-        move_metasprite(animations[animState][anim_frames[cur_frame - 1]], animation_tile, 0, player.pos.x, player.pos.y);
+        
     }
 }
