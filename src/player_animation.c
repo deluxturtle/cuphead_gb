@@ -36,7 +36,7 @@ void player_init_anim()
 {
     set_sprite_data(0, sizeof(sprite_player_idle_tiles)>>4, sprite_player_idle_tiles);
 
-    set_sprite_data(CUPH_FIRE_TILE_START, sizeof(sprite_player_fire_tiles)>>2, sprite_player_fire_tiles);
+    set_sprite_data(CUPH_FIRE_TILE_START, sizeof(sprite_player_fire_tiles)>>4, sprite_player_fire_tiles);
 
     set_sprite_data(CUPH_JUMP_TILE_START, sizeof(sprite_player_jump_tiles)>>4, sprite_player_jump_tiles);
 
@@ -46,6 +46,7 @@ void player_init_anim()
     animState = IDLE;
     prevAnimState = animState;
     
+
     player_reset_anim();
 }
 
