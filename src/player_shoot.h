@@ -5,6 +5,6 @@
 #include "player_base.h"
 #include "bullet_pool.h"
 
-
+void shoot(BulletPool* bulletPool, Player* player);
 
 #endif

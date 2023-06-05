@@ -4,9 +4,9 @@
 #include "player_base.h"
 
 //moves player position right.
-void player_move_right();
+void player_move_right(Player* player);
 //moves player position left.
-void player_move_left();
+void player_move_left(Player* player);
 
 
 #endif

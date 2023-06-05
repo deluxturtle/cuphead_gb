@@ -10,7 +10,18 @@
 // Type Definitions 
 // struct
       //structstack  named stack
-typedef struct stack stack;
+
+typedef struct node node;
+
+struct node{
+    void* element;
+    node* next;
+};
+
+typedef struct stack {
+    node* head;
+    uint8_t size;
+}stack;
 
 ////////////////////////////////////////////////////////////////////////////////
 //Function Declerations

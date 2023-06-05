@@ -1,20 +1,6 @@
 #include <gb/gb.h>
 #include "stack.h"
 
-////////////////////////////////////////////////////////////////////////////////
-// Type Definitions 
-
-typedef struct node node;
-
-struct node{
-    void* element;
-    node* next;
-};
-
-struct stack {
-    node* head;
-    int size;
-};
 
 ////////////////////////////////////////////////////////////////////////////////
 //Function Declerations
@@ -26,8 +12,7 @@ stack* stack_create(){
     
     //Memory allocation failed
     if(new_stack == NULL){
-        printf("Failed to create stack..\n");
-        exit(1);
+        return NULL;
     }
     //Memory allocation succeeded.
     else{

@@ -20,24 +20,26 @@
 #include "../res/sprite_player_jump.h"
 
 
-
-
 /**
  * @brief Master list of animations
  * If needing to add more this is the first thing to add to.
  * 
  */
-typedef enum AnimState{
+typedef enum Animation{
     IDLE,
     FIRE,
     JUMP
-}AnimState;
+}Animation;
 
-extern AnimState animState;
-extern metasprite_t *const *animations[4];
-extern uint8_t *anim_frames;
-extern uint8_t cur_frame;
-extern uint8_t animation_tile;
+typedef struct AnimationState{
+    Animation animation;
+    Animation prevAnimation;
+    metasprite_t *const *animations[4];
+    uint8_t* anim_frames;
+    uint8_t cur_frame;
+    uint8_t animation_tile;
+}AnimationState;
+
 
 void player_reset_anim();
 

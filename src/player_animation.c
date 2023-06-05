@@ -1,18 +1,9 @@
 #include "player_animation.h"
 
 
-metasprite_t *const *animations[4];
-AnimState animState;
-AnimState prevAnimState;
-
-
-uint8_t animation_tile;
 uint8_t sprite_tile_index = 0;
 
 uint8_t counter = 0;
-uint8_t *anim_frames;
-
-uint8_t cur_frame = 1;//animation frame counter;
 int8_t anim_dir = 1; //direciton to go through animation.
 
 
@@ -32,7 +23,7 @@ const uint8_t jump_frames_index[16] = {0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7};
 
 
 
-void player_init_anim()
+void player_init_anim(Player* player)
 {
     set_sprite_data(0, sizeof(sprite_player_idle_tiles)>>4, sprite_player_idle_tiles);
 
@@ -43,7 +34,7 @@ void player_init_anim()
     animations[JUMP] = sprite_player_jump_metasprites;
     animations[FIRE] = sprite_player_fire_metasprites;
     animations[IDLE] = sprite_player_idle_metasprites;
-    animState = IDLE;
+    player->animState = IDLE;
     prevAnimState = animState;
     
 

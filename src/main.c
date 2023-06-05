@@ -2,10 +2,7 @@
 #include <gb/metasprites.h>
 #include <gb/cgb.h>
 #include "player_base.h"
-
-
-//Author:deluxturtle
-//date:6/29/21
+#include "bullet_pool.h"
 
 
 
@@ -15,6 +12,9 @@
 void get_input();
 void init_audio();
 void test_audio();
+
+BulletPool playerBulletPool;
+Player player;
 
 void main(){
     init_audio();
@@ -29,8 +29,14 @@ void main(){
     // 3	Black
     //           3 1 0 transparent
     OBP0_REG = 0b11010000;
-    player_init();
+    player_init(&player);
+
+    player.bulletPool = &playerBulletPool;
+    //load bullet tile into vram
+    set_sprite_data(50, 1, sprite_player_bullet_tile);
     
+    init_bullets(&playerBulletPool, 4, 50, 3);
+
     SHOW_SPRITES;
     //Quick test for audio.
     wait_vbl_done();
@@ -38,7 +44,7 @@ void main(){
     while(1){
         get_input();
         
-        player_update();
+        player_update(&player);
         
         wait_vbl_done();
     }
@@ -54,17 +60,18 @@ void get_input(){
     uint8_t joy = joypad();
 
     if(joy & J_RIGHT){
-        player_move_right();
+        player_move_right(&player);
     }
     else if(joy & J_LEFT){
-        player_move_left();
+        player_move_left(&player);
     }
     if(joy & J_A || player.jumping == 1){
-        player_jump();
+        player_jump(&player);
         //test_audio();
     }
     if(joy & J_B){
         animState = FIRE;
+        shoot(player.bulletPool, &player);
         
     }
 }

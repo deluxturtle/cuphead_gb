@@ -15,10 +15,13 @@ typedef struct Bullet{
     Position pos;
     CircleCol collider;
     bool moving;
+    uint8_t spriteID;
 }Bullet;
 
 //Updates bullet position and out of bounds for it self.
 void update(struct Bullet* bullet);
 //Lets bullet move or freeze it.
 void set_moving(struct Bullet* bullet, bool value);
+
+void fire_bullet(struct Bullet* bullet, struct Position* pos);
 #endif

@@ -5,6 +5,10 @@
         "metasprites.h": "c",
         "player_base.h": "c",
         "sprite_player_jump.h": "c",
-        "sprite_player_bullet.h": "c"
+        "sprite_player_bullet.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "utility": "c"
     }
 }

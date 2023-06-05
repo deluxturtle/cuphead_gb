@@ -4,7 +4,7 @@
 #include "player_base.h"
 
 
-void player_jump();
+void player_jump(Player* player);
 
 
 #endif

@@ -3,32 +3,22 @@
  * The bullet spawner and pool manager :)
 */
 
-//Collider offset so circle collider is centered in the sprite.
-#define COLLIDER_POS_X 4
-#define COLLIDER_POS_Y 4
 
-
-Bullet bullets[4];
-stack *freeBullets;
 
 
 //Initializes all bullets and puts them in a pool
-void init_bullets(){
-
-    //Set sprite Data
-    set_sprite_data(50, 1, sprite_player_bullet_tile);
-
+//Just make sure to set sprite tiles for your sprite before.
+void init_bullets(BulletPool* pool, uint8_t number_of_bullets, uint8_t tile, uint8_t startingSprite){
     //Create the bullet pool
-    freeBullets = stack_create();
-    for(uint8_t i = 0; i < MAX_BULLETS; i++){
-        bullets[i].pos.x = 0;
-        bullets[i].pos.y = 0;
-        bullets[i].collider.pos = &bullets[i].pos;
-        stack_push(freeBullets, &bullets[i]);
-
+    pool->freeBullets = stack_create();
+    
+    for(uint8_t i = 0; i < number_of_bullets; i++){
+        pool->bullets[i].pos.x = 0;
+        pool->bullets[i].pos.y = 0;
+        pool->bullets[i].collider.pos = &pool->bullets[i].pos;
+        pool->bullets[i].spriteID = startingSprite + i;
+        stack_push(pool->freeBullets, &pool->bullets[i]);
+        set_sprite_tile(pool->bullets[i].spriteID, tile);
     }
-
-    //initilize bullets
-    uint8_t i;
 
 }
