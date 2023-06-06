@@ -16,6 +16,7 @@ typedef struct Bullet{
     CircleCol collider;
     bool moving;
     uint8_t spriteID;
+    uint8_t index;
 }Bullet;
 
 //Updates bullet position and out of bounds for it self.

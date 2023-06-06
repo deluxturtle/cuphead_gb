@@ -10,7 +10,7 @@
 
 typedef struct BulletPool{
     Bullet bullets[4];
-    stack* freeBullets;
+    Bullet* freeBullets[4];
 }BulletPool;
 
 void init_bullets(BulletPool* pool, uint8_t number_of_bullets, uint8_t tile, uint8_t startingSprite);

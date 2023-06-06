@@ -31,102 +31,102 @@ void player_init_anim(Player* player)
 
     set_sprite_data(CUPH_JUMP_TILE_START, sizeof(sprite_player_jump_tiles)>>4, sprite_player_jump_tiles);
 
-    animations[JUMP] = sprite_player_jump_metasprites;
-    animations[FIRE] = sprite_player_fire_metasprites;
-    animations[IDLE] = sprite_player_idle_metasprites;
-    player->animState = IDLE;
-    prevAnimState = animState;
+    player->animationState.animations[JUMP] = sprite_player_jump_metasprites;
+    player->animationState.animations[FIRE] = sprite_player_fire_metasprites;
+    player->animationState.animations[IDLE] = sprite_player_idle_metasprites;
+    player->animationState.animation = IDLE;
+    player->animationState.prevAnimation = player->animationState.animation;
     
 
-    player_reset_anim();
+    player_reset_anim(player);
 }
 
-void player_reset_anim()
+void player_reset_anim(Player* player)
 {
-    switch (animState)
+    switch (player->animationState.animation)
     {
         case JUMP:
-            anim_frames = jump_frames_index;
-            animation_tile = CUPH_JUMP_TILE_START;
+            player->animationState.anim_frames = jump_frames_index;
+            player->animationState.animation_tile = CUPH_JUMP_TILE_START;
             break;
         case FIRE:
-            anim_frames = fire_frames_index;
-            animation_tile = CUPH_FIRE_TILE_START;
+            player->animationState.anim_frames = fire_frames_index;
+            player->animationState.animation_tile = CUPH_FIRE_TILE_START;
             break;
         default:
-            anim_frames = idle_frame_index;
-            animation_tile = CUPH_IDLE_TILE_START;
+            player->animationState.anim_frames = idle_frame_index;
+            player->animationState.animation_tile = CUPH_IDLE_TILE_START;
             break;
     }
     
     anim_dir = 1;
     //little transition
-    if(prevAnimState == FIRE && animState == IDLE){
+    if(player->animationState.prevAnimation == FIRE && player->animationState.animation == IDLE){
         anim_dir = -1;
-        cur_frame = idle_frames;
+        player->animationState.cur_frame = idle_frames;
     }
     else{
-        cur_frame = 1;
+        player->animationState.cur_frame = 1;
     }
     
 }
 
-void play_idle()
+void play_idle(Player* player)
 {
-    cur_frame += anim_dir;
-    if (cur_frame > idle_frames)
+    player->animationState.cur_frame += anim_dir;
+    if (player->animationState.cur_frame > idle_frames)
     {
-        cur_frame = idle_frames;
+        player->animationState.cur_frame = idle_frames;
         anim_dir = -1;
     }
-    else if (cur_frame == 1)
+    else if (player->animationState.cur_frame == 1)
     {
         anim_dir = 1;
     }
 }
 
-void play_jump()
+void play_jump(Player* player)
 {
-    cur_frame += anim_dir;
-    if (cur_frame > jump_frames)
+    player->animationState.cur_frame += anim_dir;
+    if (player->animationState.cur_frame > jump_frames)
     {
-        cur_frame = 1;
+        player->animationState.cur_frame = 1;
     }
 }
 
-void play_fire()
+void play_fire(Player* player)
 {
-    cur_frame += anim_dir;
-    if (cur_frame > fire_frames)
+    player->animationState.cur_frame += anim_dir;
+    if (player->animationState.cur_frame > fire_frames)
     {
-        cur_frame = 1;
-        animState = IDLE;
+        player->animationState.cur_frame = 1;
+        player->animationState.animation = IDLE;
     }
 }
 
 
-void player_update_animation()
+void player_update_animation(Player* player)
 {
     //if animation state changed go back to frame 1;
-    if(prevAnimState != animState){
-        player_reset_anim();
-        prevAnimState = animState;
+    if(player->animationState.prevAnimation != player->animationState.animation){
+        player_reset_anim(player);
+        player->animationState.prevAnimation = player->animationState.animation;
     }
     //animation frame rate
     counter ++;
     if(counter > 1){
         counter = 0;
-        switch (animState)
+        switch (player->animationState.animation)
         {
             case JUMP:
-                play_jump();
+                play_jump(player);
                 break;
             case FIRE:
-                play_fire();
+                play_fire(player);
                 break;
 
             default:
-                play_idle();
+                play_idle(player);
                 break;
         }
         

@@ -1,7 +1,13 @@
 #include <gb/gb.h>
 #include <gb/metasprites.h>
 #include <gb/cgb.h>
-#include "player_base.h"
+
+#include "player_update.h"
+#include "player_init.h"
+#include "player_movement.h"
+#include "player_shoot.h"
+#include "player_jump.h"
+
 #include "bullet_pool.h"
 
 
@@ -30,12 +36,10 @@ void main(){
     //           3 1 0 transparent
     OBP0_REG = 0b11010000;
     player_init(&player);
-
-    player.bulletPool = &playerBulletPool;
     //load bullet tile into vram
     set_sprite_data(50, 1, sprite_player_bullet_tile);
     
-    init_bullets(&playerBulletPool, 4, 50, 3);
+    
 
     SHOW_SPRITES;
     //Quick test for audio.
@@ -70,9 +74,8 @@ void get_input(){
         //test_audio();
     }
     if(joy & J_B){
-        animState = FIRE;
-        shoot(player.bulletPool, &player);
-        
+        player.animationState.animation = FIRE;
+        shoot(&player);
     }
 }
 

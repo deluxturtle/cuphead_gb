@@ -3,8 +3,8 @@
 
 #include <gb/gb.h>
 #include "player_base.h"
-#include "bullet_pool.h"
+#include "bullet_obj.h"
 
-void shoot(BulletPool* bulletPool, Player* player);
+void shoot(Player* player);
 
 #endif
