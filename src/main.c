@@ -7,10 +7,9 @@
 #include "player_movement.h"
 #include "player_shoot.h"
 #include "player_jump.h"
+#include "bullet_obj.h"
 
-#include "bullet_pool.h"
-
-
+#define PLAYER_BULLET_COUNT 4
 
 ///////////////////////////////////////////////////////////////////////////////
 //FOWARD DECLA
@@ -19,7 +18,6 @@ void get_input();
 void init_audio();
 void test_audio();
 
-BulletPool playerBulletPool;
 Player player;
 
 void main(){
@@ -38,17 +36,29 @@ void main(){
     player_init(&player);
     //load bullet tile into vram
     set_sprite_data(50, 1, sprite_player_bullet_tile);
-    
+    init_bullets(&player.bulletPool, PLAYER_BULLET_COUNT, 50, 4);
     
 
     SHOW_SPRITES;
     //Quick test for audio.
     wait_vbl_done();
     test_audio();
+
+    uint8_t i;
+    Bullet* playerBullets = player.bulletPool.bullets;
     while(1){
         get_input();
         
         player_update(&player);
+
+
+        for(i = 0; i < PLAYER_BULLET_COUNT; i++){
+            bullet_update(playerBullets);
+            playerBullets++;
+        }
+        playerBullets = player.bulletPool.bullets;
+
+        
         
         wait_vbl_done();
     }

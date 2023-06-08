@@ -10,7 +10,7 @@
 typedef struct Player{
     Position pos;
     CircleCol collider;
-    BulletPool* bulletPool;
+    BulletPool bulletPool;
     uint8_t jumping;
     uint8_t frame;
     AnimationState animationState;
