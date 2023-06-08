@@ -8,4 +8,9 @@ typedef struct Position{
     uint8_t y;
 }Position;
 
+typedef enum Facing{
+    LEFT,
+    RIGHT
+}Facing;
+
 #endif

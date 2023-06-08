@@ -14,6 +14,8 @@ typedef struct Player{
     uint8_t jumping;
     uint8_t frame;
     AnimationState animationState;
+    uint8_t fireDelay;
+    Facing facingDirection;
 }Player;
 
 

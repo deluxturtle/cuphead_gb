@@ -17,7 +17,8 @@ struct Bullet{
     uint8_t spriteID;
     uint8_t index;
     Bullet* next;//for the pool
-    BulletPool* pool;
+    BulletPool* pool;//where the bullet lives :) lol
+    Facing bulletDir;
 };
 
 typedef struct BulletPool{

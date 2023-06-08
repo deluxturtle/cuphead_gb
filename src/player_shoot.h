@@ -5,6 +5,8 @@
 #include "player_base.h"
 #include "bullet_obj.h"
 
+#define FIRE_RATE 15
+
 void shoot(Player* player);
 
 #endif
