@@ -9,6 +9,7 @@ Current project scope is just the first boss from cuphead - Root Pack
     - [x] Simple Move
     - [ ] Platformer Bounds
     - [ ] Colliders
+    - [x] Player Bullets
 - [ ] Cuphead Animations
     - [x] Idle
     - [x] Standing Fire
@@ -28,5 +29,5 @@ vscode
 Emulicious
 
 ### Thanks For Help and GBDK2020
-Toxa
+Toxa,
 bbbbbr
