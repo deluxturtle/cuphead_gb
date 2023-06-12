@@ -31,3 +31,10 @@ Emulicious
 ### Thanks For Help and GBDK2020
 Toxa,
 bbbbbr
+
+
+### Learning Experiences
+
+#### Big Animations For Boss
+I had the idea of just using the background layer map to hold frames of animation for the boss and use the STAT Interupt scroll method/trick to slide the background to the frames for the animation.
+I had to hide everything to the side of the boss because it would just be a whole sprite sheet across the screen but learned the Window causes all the background tiles to the right of it to stop being rendered so I had to flip where the boss was so it was to the left of the window.

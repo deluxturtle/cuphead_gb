@@ -9,10 +9,15 @@
 void bullet_update(struct Bullet* bullet){
     if(!bullet->moving)
         return;
+
+    //If cpu is getting to the limit maybe just make the bullet a 
+    //square so we don't have to flip it haha... :/
     if(bullet->bulletDir == RIGHT){
+        set_sprite_prop(bullet->spriteID, 0x00);
         bullet->pos.x += BULLETSPEED;
     }
     else{
+        set_sprite_prop(bullet->spriteID, S_FLIPX);
         bullet->pos.x -= BULLETSPEED;
     }
 

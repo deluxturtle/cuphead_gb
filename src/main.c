@@ -9,6 +9,9 @@
 #include "player_jump.h"
 #include "bullet_obj.h"
 
+#include "fliped_rootpack_testy.h"
+#include "potato_window.h"
+
 #define PLAYER_BULLET_COUNT 4
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -18,10 +21,39 @@ void get_input();
 void init_audio();
 void test_audio();
 
+
+unsigned char windowtestmap_tilemap[] = {
+  0x00, 0x00, 0x1e, 0x13, 0x1f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x00, 0x25, 0x26, 0x27, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x00, 0x00, 0x13, 0x2c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+  0x00, 0x00, 0x00, 0x00, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13,
+  0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13, 0x13,
+  0x13, 0x13, 0x13, 0x13, 0x13, 0x13
+};
+
+unsigned int windowtestmap_len = 78;
+
 Player player;
 
 void main(){
     init_audio();
+
+    set_bkg_data(0,fliped_rootpack_testy_TILE_COUNT, fliped_rootpack_testy_tiles);
+    set_bkg_tiles(0,0,32,32,fliped_rootpack_testy_map);
+    SHOW_BKG;
+
+    uint8_t x = 6;
+    uint8_t y = 8;
+    //potato window
+    set_win_submap(0,0,14,8,(fliped_rootpack_testy_map + x + (y * 32)),32);
+    move_win(55,64);    
+    
+
+    SHOW_WIN;
+
+    
+
     // remaps the palette
     // Bit 7-6 - Color for index 3
     // Bit 5-4 - Color for index 2
@@ -38,7 +70,6 @@ void main(){
     set_sprite_data(50, 1, sprite_player_bullet_tile);
     init_bullets(&player.bulletPool, PLAYER_BULLET_COUNT, 50, 4);
     
-
     SHOW_SPRITES;
     //Quick test for audio.
     wait_vbl_done();
@@ -47,6 +78,7 @@ void main(){
     uint8_t i;
     Bullet* playerBullets = player.bulletPool.bullets;
     while(1){
+        
         get_input();
         
         player_update(&player);
@@ -79,12 +111,11 @@ void get_input(){
     else if(joy & J_LEFT){
         player_move_left(&player);
     }
-    if(joy & J_A || player.jumping == 1){
-        player_jump(&player);
+    if(joy & J_A){
+        player.jumping = 1;
         //test_audio();
     }
     if(joy & J_B){
-        player.animationState.animation = FIRE;
         shoot(&player);
     }
 }

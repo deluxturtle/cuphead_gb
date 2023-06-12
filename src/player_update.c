@@ -3,6 +3,8 @@
 
 void player_update(Player* player){
     player_update_animation(player);
+    if(player->jumping)
+        player_jump(player);
 
     //I wanted to do a function but its probably ruining my stack overhead.
     if(player->fireDelay > 0)

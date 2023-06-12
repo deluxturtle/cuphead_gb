@@ -4,6 +4,9 @@
 #define SHOOT_OFFSET_FLIP_X 12
 
 void shoot(Player* player){
+    if(!player->jumping)
+        player->animationState.animation = FIRE;
+    
     if(player->fireDelay > 0)
         return;
     
