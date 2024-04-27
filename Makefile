@@ -6,8 +6,18 @@
 # to match your GBDK root directory (ex: GBDK_HOME = "C:/GBDK/"
 GBDK_HOME = "/opt/gbdk/"
 
-LCC = $(GBDK_HOME)bin/lcc -debug
+LCC = $(GBDK_HOME)bin/lcc
+SDAR = $(GBDK_HOME)/bin/sdar
 # PNG2MTSPR = $(GBDK_HOME)bin/png2asset
+
+ifndef RGBDS_HOME
+#default location after installing rgbds :p
+RGBDS_HOME = ../usr/local/bin
+endif 
+
+RGBASM = $(RGBDS_HOME)/rgbasm
+
+
 
 # You can uncomment the line below to turn on debug output
 #LCC = $(LCC) 
@@ -27,10 +37,12 @@ PROJECTNAME    = Cuphead
 SRCDIR      = src
 OBJDIR      = obj
 RESDIR      = res
-BINS	    = $(OBJDIR)/$(PROJECTNAME).gb
+BUILD_DIR   = build
+
+BINS	    = $(BUILD_DIR)/$(PROJECTNAME).gb
 CSOURCES    = $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.c))) $(foreach dir,$(RESDIR),$(notdir $(wildcard $(dir)/*.c)))
 ASMSOURCES  = $(foreach dir,$(SRCDIR),$(notdir $(wildcard $(dir)/*.s)))
-OBJS       = $(CSOURCES:%.c=$(OBJDIR)/%.o) $(ASMSOURCES:%.s=$(OBJDIR)/%.o)
+OBJS       = $(CSOURCES:%.c=$(OBJDIR)/%.o) $(ASMSOURCES:%.s=$(OBJDIR)/%.o) $(OBJDIR)/hUGEDriver.o
 
 all:	prepare $(BINS)
 
@@ -61,7 +73,7 @@ $(OBJDIR)/%.o:	$(SRCDIR)/%.s
 # (not required if .c is compiled directly to .o)
 $(OBJDIR)/%.s:	$(SRCDIR)/%.c
 	$(LCC) $(LCCFLAGS) -S -o $@ $<
-
+	
 # Link the compiled object files into a .gb ROM file
 $(BINS):	$(OBJS)
 	$(LCC) $(LCCFLAGS) -o $(BINS) $(OBJS)

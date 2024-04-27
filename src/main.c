@@ -1,6 +1,7 @@
 #include <gb/gb.h>
 #include <gb/metasprites.h>
 #include <gb/cgb.h>
+#include "hUGEDriver.h"
 
 #include "player_update.h"
 #include "player_init.h"
@@ -13,6 +14,8 @@
 #include "potato_window.h"
 
 #define PLAYER_BULLET_COUNT 4
+
+extern const hUGESong_t botanic_panic_boss;
 
 ///////////////////////////////////////////////////////////////////////////////
 //FOWARD DECLA
@@ -41,16 +44,22 @@ void main(){
 
     set_bkg_data(0,fliped_rootpack_testy_TILE_COUNT, fliped_rootpack_testy_tiles);
     set_bkg_tiles(0,0,32,32,fliped_rootpack_testy_map);
+    
+	__critical {
+        hUGE_init(&botanic_panic_boss);
+        add_VBL(hUGE_dosound);
+    }
+    
     SHOW_BKG;
 
-    uint8_t x = 6;
-    uint8_t y = 8;
+    //uint8_t x = 6;
+    //uint8_t y = 8;
     //potato window
-    set_win_submap(0,0,14,8,(fliped_rootpack_testy_map + x + (y * 32)),32);
-    move_win(55,64);    
+    //set_win_submap(0,0,14,8,(fliped_rootpack_testy_map + x + (y * 32)),32);
+    //move_win(55,64);    
     
 
-    SHOW_WIN;
+    //SHOW_WIN;
 
     
 
@@ -73,7 +82,7 @@ void main(){
     SHOW_SPRITES;
     //Quick test for audio.
     wait_vbl_done();
-    test_audio();
+    //test_audio();
 
     uint8_t i;
     Bullet* playerBullets = player.bulletPool.bullets;
@@ -138,6 +147,7 @@ void test_audio(){
     // 3	Sweep Direction (1: decrease, 0: increase)
     // 2-0	Sweep RtShift amount (if 0, sweeping is off)
     // 0001 0110 is 0x16, sweet time 1, sweep direction increase, shift ammount per step 110 (6 decimal)
+    
     NR10_REG = 0x16;
 
     // chanel 1 register 1: Wave pattern duty and sound length
@@ -145,6 +155,7 @@ void test_audio(){
     // 7-6	Wave pattern duty cycle 0-3 (12.5%, 25%, 50%, 75%), duty cycle is how long a quadrangular  wave is "on" vs "of" so 50% (2) is both equal.
     // 5-0 sound length (higher the number shorter the sound)
     // 01000000 is 0x40, duty cycle 1 (25%), wave length 0 (long)
+    
     NR11_REG = 0x40;
 
     // chanel 1 register 2: Volume Envelope (Makes the volume get louder or quieter each "tick")
@@ -154,12 +165,14 @@ void test_audio(){
     // 2-0	Length of each step in sweep (if 0, sweeping is off)
     // NOTE: each step is n/64 seconds long, where n is 1-7	
     // 0111 0011 is 0x73, volume 7, sweep down, step length 3
+    
     NR12_REG = 0x73;
 
     // chanel 1 register 3: Frequency LSbs (Least Significant bits) and noise options
     // for Channels 1 2 and 3
     // 7-0	8 Least Significant bits of frequency (3 Most Significant Bits are set in register 4)
-    NR13_REG = 0x00;
+   
+    //NR13_REG = 0x00;
 
     // chanel 1 register 4: Playback and frequency MSbs
     // Channels 1 2 3 and 4
@@ -168,5 +181,6 @@ void test_audio(){
     // 5-3	Unused
     // 2-0	3 Most Significant bits of frequency
     // 1100 0011 is 0xC3, initialize, no consecutive, frequency = MSB + LSB = 011 0000 0000 = 0x300
+    
     NR14_REG = 0xC3;	 
 }

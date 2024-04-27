@@ -1,0 +1,15 @@
+[default]
+name=Default
+runtime=host
+toolchain=default
+config-opts=/opt/gbdk/include
+run-opts=
+prefix=/home/deluxturtle/.cache/gnome-builder/install/cuphead_gb/host
+app-id=
+postbuild=
+prebuild=
+run-command=
+default=true
+
+[default.environment]
+GBDK_HOME=/opt/gbdk
