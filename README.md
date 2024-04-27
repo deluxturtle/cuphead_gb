@@ -21,6 +21,9 @@ Current project scope is just the first boss from cuphead - Root Pack
     - [ ] Spawn / Death
 - [ ] Flying Enemies
 - [ ] Background Art
+- [ ] Music
+    - [x] Driver
+    - [ ] Full Botanic Panic Song
 
 ### Tools
 GBDK-2020
